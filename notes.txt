@@ -1,0 +1,1 @@
+marvel api = http://gateway.marvel.com/v1/public/comics?ts=1&apikey=7943881fc541cf7d3e9404918d8f5955&hash=7644c2f4990e51e4d36c43a48bc722d0
