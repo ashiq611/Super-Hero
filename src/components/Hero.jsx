@@ -13,6 +13,7 @@ const Hero = () => {
           <div className="hero-content flex-col lg:flex-row-reverse">
             <img
               src="https://www.dexerto.com/cdn-cgi/image/width=3840,quality=75,format=auto/https://editors.dexerto.com/wp-content/uploads/2023/06/07/the-amazing-spider-man-2012.jpeg"
+              alt="Profile"
               className="max-w-sm rounded-lg shadow-2xl"
             />
             <div>
