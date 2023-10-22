@@ -15,7 +15,7 @@ const Characters = () => {
           .then((response) => response.json())
           .then((json) => setData(json?.data.results));
     },[])
-    console.log(data)
+    // console.log(data)
     return (
       <div className="container mx-auto">
         <div className="ml-24 mb-10 mt-10 md:ml-0 md:flex md:justify-between md:gap-3 md:flex-wrap">

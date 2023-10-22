@@ -9,7 +9,7 @@ const NavBar = () => {
 
   const auth = getAuth();
 
-  console.log(auth)
+  // console.log(auth)
 
 
   const handleSignOut = () => {

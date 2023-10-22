@@ -1,49 +1,64 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import {
   getAuth,
   signInWithEmailAndPassword,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 
-
 const LoginPage = () => {
-
   const auth = getAuth();
-  
+
   const navigate = useNavigate();
 
-   const [email, setEmail] = useState("");
-   const [password, setPassword] = useState("");
-   const [gLog, setGlog] = useState({})
-  //  const [showAlert, setShowAlert] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [gLog, setGlog] = useState({});
+  const [showPass, setshowPass] = useState("password");
 
+ 
 
-   const handleEmail = (e) => {
-     setEmail(e.target.value);
-   };
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
 
-   const handlePass = (e) => {
-     setPassword(e.target.value);
-   };
+  const handlePass = (e) => {
+    setPassword(e.target.value);
+  };
 
+  // show pass icon operation
+  const handleShowPass = () => {
+    if (showPass == "password") {
+      setshowPass("text");
+    } else {
+      setshowPass("password");
+    }
+  };
 
-   const handleSubmit = (e) => {
-     e.preventDefault();
+  //  const handleSubmit = () => {
+  //   createUserWithEmailAndPassword(auth, email, password);
+  //   navigate('/home')
+  //  }
 
-     if (email === "" && password === "") {
-       alert("error");
-     } else {
+  console.log(auth?.currentUser?.email);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (email === "" && password === "") {
+      alert("error");
+    } else {
       // email & pass
-       
+
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user)
-          navigate('/home')
+          console.log(user);
+          navigate("/home");
           // ...
         })
         .catch((error) => {
@@ -51,14 +66,13 @@ const LoginPage = () => {
           const errorMessage = error.message;
           alert(errorCode, errorMessage);
         });
-     }
-   };
-
+    }
+  };
 
   //  signIn with google
   const provider = new GoogleAuthProvider();
 
-   const SignInWithGoogle = () => {
+  const SignInWithGoogle = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         // This gives you a Google Access Token. You can use it to access the Google API.
@@ -67,9 +81,8 @@ const LoginPage = () => {
         // The signed-in user info.
         const user = result.user;
         // IdP data available using getAdditionalUserInfo(result)
-        setGlog(user)
+        setGlog(user);
         navigate("/home");
-
       })
       .catch((error) => {
         // Handle Errors here.
@@ -82,9 +95,7 @@ const LoginPage = () => {
         alert(errorCode, errorMessage, email, credential);
         // ...
       });
-   }
-  
-   
+  };
 
   return (
     <div>
@@ -101,9 +112,7 @@ const LoginPage = () => {
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <form onSubmit={handleSubmit} className="card-body">
               <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
+                <label className="label"></label>
                 <input
                   onChange={handleEmail}
                   value={email}
@@ -113,24 +122,37 @@ const LoginPage = () => {
                   required
                 />
               </div>
-              <div className="form-control">
+
+              <div className="form-control relative">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
                 <input
                   onChange={handlePass}
                   value={password}
-                  type="password"
+                  type={showPass}
                   placeholder="password"
                   className="input input-bordered"
                   required
                 />
+                {showPass == "password" ? (
+                  <AiFillEyeInvisible
+                    onClick={handleShowPass}
+                    className="absolute translate-y-1/2 top-12 right-[10%] "
+                  ></AiFillEyeInvisible>
+                ) : (
+                  <AiFillEye
+                    onClick={handleShowPass}
+                    className=" absolute translate-y-1/2 top-12 right-[10%]"
+                  ></AiFillEye>
+                )}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
                   </a>
                 </label>
               </div>
+
               <div className="form-control mt-6">
                 <button className="btn btn-primary capitalize">Login</button>
               </div>
@@ -141,7 +163,10 @@ const LoginPage = () => {
                 </Link>
               </div>
               <div>
-                <button onClick={SignInWithGoogle} className="btn w-full capitalize">
+                <button
+                  onClick={SignInWithGoogle}
+                  className="btn w-full capitalize"
+                >
                   <img
                     className="w-8"
                     src="https://www.vectorlogo.zone/logos/google/google-icon.svg"

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -17,6 +18,7 @@ const RegistrationPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [gLog, setGlog] = useState({});
+  const [showPass, setshowPass] = useState("password");
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -25,6 +27,16 @@ const RegistrationPage = () => {
   const handlePass = (e) => {
     setPassword(e.target.value);
   };
+
+
+  // show pass icon operation
+   const handleShowPass = () => {
+     if (showPass == "password") {
+       setshowPass("text");
+     } else {
+       setshowPass("password");
+     }
+   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -37,6 +49,7 @@ const RegistrationPage = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
+          navigate('/')
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -100,23 +113,30 @@ const RegistrationPage = () => {
                   required
                 />
               </div>
-              <div className="form-control">
+              <div className="form-control relative">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
                 <input
                   onChange={handlePass}
                   value={password}
-                  type="password"
+                  type={showPass}
                   placeholder="password"
                   className="input input-bordered"
                   required
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
+                {showPass == "password" ? (
+                  <AiFillEyeInvisible
+                    onClick={handleShowPass}
+                    className="absolute translate-y-1/2 top-12 right-[10%] "
+                  ></AiFillEyeInvisible>
+                ) : (
+                  <AiFillEye
+                    onClick={handleShowPass}
+                    className=" absolute translate-y-1/2 top-12 right-[10%]"
+                  ></AiFillEye>
+                )}
+                
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary capitalize">
