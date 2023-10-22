@@ -1,8 +1,6 @@
-# React + Vite
+# Super-Hero used by Marvel Api
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Recording Video: https://drive.google.com/file/d/1otcaubccx_0D3SYDSX7WiHrpU6zv0qB5/view?usp=share_link
+Youtube : https://youtu.be/xs3g2Ibv1V4
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Website Live: https://fastidious-empanada-695dd2.netlify.app/
