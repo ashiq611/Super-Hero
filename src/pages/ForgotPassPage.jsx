@@ -1,6 +1,7 @@
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"; 
 
 
 const ForgotPassPage = () => {
@@ -21,6 +22,7 @@ const ForgotPassPage = () => {
             sendPasswordResetEmail(auth, email)
               .then(() => {
                 // Password reset email sent!
+                setEmail("")
                 navigate('/')
 
                 // ..
@@ -28,7 +30,7 @@ const ForgotPassPage = () => {
               .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                console(errorMessage);
+                console.log(errorMessage);
                 // ..
               });
 
@@ -60,9 +62,22 @@ const ForgotPassPage = () => {
                     required
                   />
                 </div>
-                
+
                 <div className="form-control mt-6">
-                  <button onClick={handleForgotPassword} className="btn btn-primary">Send Email</button>
+                  <button
+                    onClick={handleForgotPassword}
+                    className="btn btn-primary"
+                  >
+                    Send Email
+                  </button>
+                </div>
+                <div className="form-control mt-6">
+                  <Link
+                    to='/'
+                    className="btn btn-primary"
+                  >
+                    Back
+                  </Link>
                 </div>
               </form>
             </div>
