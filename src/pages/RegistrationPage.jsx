@@ -5,7 +5,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithPopup,
-  GoogleAuthProvider
+  GoogleAuthProvider,
+  sendEmailVerification
 } from "firebase/auth";
 
 
@@ -49,6 +50,8 @@ const RegistrationPage = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
+          sendEmailVerification(auth.currentUser);
+
           navigate('/')
         })
         .catch((error) => {
