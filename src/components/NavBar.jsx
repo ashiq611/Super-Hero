@@ -17,8 +17,10 @@ const NavBar = () => {
     
     signOut(auth)
       .then(() => {
+        console.log("logout success")
         // Sign-out successful.
         navigate('/')
+        
       })
       .catch((error) => {
         alert(error)
@@ -33,11 +35,10 @@ const NavBar = () => {
           </a>
         </div>
         <div className="flex-none">
-         
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src="https://i.pinimg.com/originals/85/07/46/85074691d76a018386df7c57536dd5a7.jpg" />
+                <img src={auth.currentUser?.photoURL} />
               </div>
             </label>
             <ul

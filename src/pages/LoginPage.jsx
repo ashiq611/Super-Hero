@@ -80,6 +80,7 @@ const LoginPage = () => {
         const token = credential.accessToken;
         // The signed-in user info.
         const user = result.user;
+        // console.log(user);
         // IdP data available using getAdditionalUserInfo(result)
         setGlog(user);
         navigate("/home");
@@ -97,6 +98,8 @@ const LoginPage = () => {
       });
   };
 
+  
+    
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
